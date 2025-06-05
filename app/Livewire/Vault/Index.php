@@ -89,7 +89,7 @@ final class Index extends Component
         $user = auth()->user();
 
         try {
-            new DeleteVault()->handle($vault);
+            (new DeleteVault())->handle($vault);
         } catch (Throwable $e) {
             $this->dispatch('toast', message: $e->getMessage(), type: 'error');
 

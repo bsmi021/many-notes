@@ -67,16 +67,16 @@ final readonly class DeleteVaultNode
      */
     private function deleteFromDisk(VaultNode $node): void
     {
-        $nodePath = new GetPathFromVaultNode()->handle($node);
+        $nodePath = (new GetPathFromVaultNode())->handle($node);
 
-        if (!Storage::disk('local')->exists($nodePath)) {
+        if (!Storage::disk('google')->exists($nodePath)) {
             return;
         }
 
         if ($node->is_file) {
-            Storage::disk('local')->delete($nodePath);
+            Storage::disk('google')->delete($nodePath);
         } else {
-            Storage::disk('local')->deleteDirectory($nodePath);
+            Storage::disk('google')->deleteDirectory($nodePath);
         }
     }
 }

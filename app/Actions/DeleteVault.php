@@ -56,7 +56,7 @@ final readonly class DeleteVault
      */
     private function deleteFromDatabase(Vault $vault): void
     {
-        $deleteVaultNode = new DeleteVaultNode();
+        $deleteVaultNode = (new DeleteVaultNode());
         $rootNodes = $vault->nodes()->whereNull('parent_id')->get();
 
         foreach ($rootNodes as $node) {
@@ -71,14 +71,12 @@ final readonly class DeleteVault
      */
     private function deleteFromDisk(Vault $vault): void
     {
-        /** @var User $user */
-        $user = $vault->user()->first();
-        $vaultPath = new GetPathFromUser()->handle($user) . $vault->name;
+        $vaultPath = (new GetPathFromVault())->handle($vault);
 
-        if (!Storage::disk('local')->exists($vaultPath)) {
+        if (!Storage::disk('google')->exists($vaultPath)) {
             return;
         }
 
-        Storage::disk('local')->deleteDirectory($vaultPath);
+        Storage::disk('google')->deleteDirectory($vaultPath);
     }
 }

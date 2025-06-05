@@ -22,7 +22,7 @@ final class Login extends Component
 
     public function mount(): void
     {
-        $this->providers = new GetAvailableOAuthProviders()->handle();
+        $this->providers = (new GetAvailableOAuthProviders())->handle();
     }
 
     /**

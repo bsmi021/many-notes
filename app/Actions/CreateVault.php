@@ -37,8 +37,8 @@ final readonly class CreateVault
         $vault = $user->vaults()->create($attributes);
 
         // Save vault to disk
-        $vaultPath = new GetPathFromVault()->handle($vault);
-        Storage::disk('local')->makeDirectory($vaultPath);
+        $vaultPath = (new GetPathFromVault())->handle($vault);
+        Storage::disk('google')->makeDirectory($vaultPath);
 
         return $vault;
     }

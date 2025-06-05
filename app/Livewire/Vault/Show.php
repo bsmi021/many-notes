@@ -130,8 +130,8 @@ final class Show extends Component
             /** @phpstan-ignore-next-line larastan.noUnnecessaryCollectionCall */
             ? $this->selectedFile->ancestorsAndSelf()->get()->last()->full_path
             : '';
-        $resolvedPath = new ResolveTwoPaths()->handle($currentPath, $path);
-        $node = new GetVaultNodeFromPath()->handle($this->vault->id, $resolvedPath);
+        $resolvedPath = (new ResolveTwoPaths())->handle($currentPath, $path);
+        $node = (new GetVaultNodeFromPath())->handle($this->vault->id, $resolvedPath);
 
         if (!$node instanceof VaultNode) {
             $this->dispatch('toast', message: __('File not found'), type: 'error');
@@ -193,7 +193,7 @@ final class Show extends Component
             return;
         }
 
-        new UpdateVault()->handle($this->vault, [
+        (new UpdateVault())->handle($this->vault, [
             'templates_node_id' => $node->id,
         ]);
 
@@ -205,7 +205,7 @@ final class Show extends Component
         $this->authorize('delete', $node);
 
         try {
-            $deletedNodes = new DeleteVaultNode()->handle($node);
+            $deletedNodes = (new DeleteVaultNode())->handle($node);
             $openFileDeleted = !is_null(
                 array_find(
                     $deletedNodes,
@@ -240,7 +240,7 @@ final class Show extends Component
 
         $this->selectedFileId = $node->id;
         $this->selectedFileExtension = $node->extension;
-        $this->selectedFileUrl = new GetUrlFromVaultNode()->handle($node);
+        $this->selectedFileUrl = (new GetUrlFromVaultNode())->handle($node);
         $this->nodeForm->setNode($node);
         unset($this->selectedFile);
     }

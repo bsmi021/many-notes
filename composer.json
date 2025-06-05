@@ -23,10 +23,11 @@
     "homepage": "https://github.com/brufdev/many-notes",
     "license": "MIT",
     "require": {
-        "php": "^8.4",
+        "php": "^8.3",
         "laravel/framework": "^12.15.0",
         "laravel/reverb": "^1.5",
         "laravel/scout": "^10.15.0",
+        "google/apiclient": "^2.15",
         "laravel/socialite": "^5.20",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6.3",
