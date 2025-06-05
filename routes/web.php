@@ -49,4 +49,11 @@ Route::middleware(['guest', 'throttle'])->group(function (): void {
             Route::get('/{provider}/callback', OAuthLoginCallback::class)->where('provider', $providers);
         }
     });
+
+    // Google OAuth Routes
+    Route::get('/auth/google/redirect', [\App\Http\Controllers\OAuthController::class, 'redirectToGoogle'])->name('auth.google.redirect');
+    Route::get('/auth/google/callback', [\App\Http\Controllers\OAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+
+    // Export All Route
+    Route::get('/export/all', [\App\Http\Controllers\ExportController::class, 'exportAll'])->name('export.all');
 });
